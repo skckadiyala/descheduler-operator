@@ -1,24 +1,9 @@
-export GO111MODULE=on
-operator-sdk add api --api-version=descheduler.example.com/v1alpha1 --kind=Descheduler
-operator-sdk generate k8s
-operator-sdk generate openapi 
-operator-sdk add controller --api-version=descheduler.example.com/v1alpha1 --kind=Descheduler
 
 
-operator-sdk build skckadiyala/descheduler-operator:v0.0.3
-docker push skckadiyala/descheduler-operator:v0.0.3
-sed -i "" 's|REPLACE_IMAGE|skckadiyala/descheduler-operator:v0.0.1|g' deploy/operator.yaml
-
-kubectl create -f deploy/crds/descheduler_v1alpha1_descheduler_crd.yaml
-kubectl create -f deploy/service_account.yaml
-kubectl create -f deploy/role.yaml
-kubectl create -f deploy/role_binding.yaml
-kubectl create -f deploy/operator.yaml
+helm upgrade --install descheduler-operator descheduler-operator 
 kubectl apply -f deploy/crds/descheduler_v1alpha1_descheduler_cr.yaml
 
-kubectl delete -f deploy/crds/descheduler_v1alpha1_descheduler_cr.yaml
-kubectl delete -f deploy/crds/descheduler_v1alpha1_descheduler_crd.yaml
-kubectl delete -f deploy/operator.yaml
-kubectl delete -f deploy/role_binding.yaml
-kubectl delete -f deploy/role.yaml
-kubectl delete -f deploy/service_account.yaml
+kubectl apply -f deploy/crds/descheduler_v1alpha1_descheduler_cr.yaml
+helm delete --purge descheduler-operator
+
+kubectl delete jobs --all

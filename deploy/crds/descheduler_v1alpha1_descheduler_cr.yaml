@@ -3,7 +3,7 @@ kind: Descheduler
 metadata:
   name: example-descheduler
 spec:
-  schedule: "*/1 * * * *"       
+  schedule: "*/30 * * * *"       
   strategies: 
   - name: "lownodeutilization"
     params:

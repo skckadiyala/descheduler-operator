@@ -1,0 +1,9 @@
+# Default values for charts.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image: skckadiyala/descheduler-operator:v0.0.3
+namespace: kube-system
+serviceAccountName: descheduler-operator
