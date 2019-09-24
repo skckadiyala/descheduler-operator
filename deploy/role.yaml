@@ -1,0 +1,38 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  name: descheduler-operator
+rules:
+- apiGroups:
+  - descheduler.axway.com
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- apiGroups:
+  - ""
+  resources:
+  - services
+  - pods
+  - configmaps
+  - secrets
+  - names
+  - nodes
+  - pods/eviction
+  verbs:
+  - "*"
+- apiGroups:
+  - apps
+  resources:
+  - deployment
+  - replicasets
+  - deployments
+  - servicemonitors
+  verbs:
+  - "*"
+- apiGroups: ["batch", "extensions"]
+  resources: ["jobs", "cronjobs"]
+  verbs:
+  - "*"
+

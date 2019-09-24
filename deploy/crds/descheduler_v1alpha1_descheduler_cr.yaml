@@ -1,0 +1,28 @@
+apiVersion: descheduler.axway.com/v1alpha1
+kind: Descheduler
+metadata:
+  name: example-descheduler
+spec:
+  schedule: "*/1 * * * *"       
+  strategies: 
+  - name: "lownodeutilization"
+    params:
+      - name: "podsthreshold"
+        value: "6"
+      - name: "podstargetthreshold"
+        value: "10"
+      # - name: "memorythreshold"
+      #   value: "40"
+      # - name: "memorytargetthreshold"
+      #   value: "80"
+      # - name: "cputhreshold"
+      #   value: "40"
+      # - name: "cputargetthreshold"
+      #   value: "80"
+  - name: "duplicates"
+  - name: "interpodantiaffinity"
+  - name: "nodeaffinity"
+  image: skckadiyala/descheduler:v0.9.0
+  flags:
+    - name: "descheduling-interval"
+      value: "10s"
