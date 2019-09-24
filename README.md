@@ -27,7 +27,7 @@ kubectl apply -f deploy/crds/descheduler_v1alpha1_descheduler_cr.yaml
 
 Deschdeular operator watches for the deschdeuler Customer Resource (CR), when CR is applied/modified 
 The operator creates/updates the deschdeuler configmap and 
-creates a new cronjob to run the deschdeuler. The Cronjob creates creates a descheduler job as per configured schedule.
+creates a new cronjob to run the deschdeuler. The Cronjob runs a descheduler job as per configured schedule.
 
 The configmap is created from the CR object, whenever there is change in the CR object the descheduler operator is responsible for identifying changes and updating the configmap. Also in few cases operatort deletes the current running cronjob and creates a new cronjob with the updated flags.
 
